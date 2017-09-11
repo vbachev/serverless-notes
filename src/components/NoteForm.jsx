@@ -38,9 +38,9 @@ class CreateNote extends React.Component {
 
 	render () {
 	 	return (
-			<form onSubmit={this.handleSubmit} className='create-note-component'>
-				<input value={this.state.title} onChange={this.handleTitleChange} />
-				<textarea value={this.state.content} onChange={this.handleContentChange} />
+			<form onSubmit={this.handleSubmit} className='note-form-component'>
+				<input className='form-field note-title' value={this.state.title} onChange={this.handleTitleChange} />
+				<textarea className='form-field note-content' value={this.state.content} onChange={this.handleContentChange} />
 				<div className='note-actions'>
 					<button className='note-action save' type='submit'>
 						Save

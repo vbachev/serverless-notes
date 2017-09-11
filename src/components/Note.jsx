@@ -11,6 +11,7 @@ class Note extends React.Component {
 	}
 
 	handleDelete () {
+		if (!window.confirm('Are you sure?')) return
 		this.props.deleteNote(this.props.id)
 	}
 

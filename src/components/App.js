@@ -14,7 +14,7 @@ class App extends React.Component {
 
 	render () {
 		return (
-			<div className="app">
+			<div className="app-component">
 				<header className='app-header'>
 					<Link to='/'>Notes</Link>
 					<Link to='/create'>Create note</Link>

@@ -1,6 +1,15 @@
+* {
+  border-bottom: ;
+}
+
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
   font-family: sans-serif;
   background: #262626;
   color: #f8f8f2;
@@ -8,7 +17,7 @@ body {
 
 /*# terminal color palette
 # palette = "#1b1d1e:#f92672:#82b414:#fd971f:#56c2d6:#8c54fe:#465457:#ccccc6:#505354:#ff5995:#b6e354:#feed6c:#8cedff:#9e6ffe:#899ca1:#f8f8f2"
-# palette = "#1b1d1e:#9e1641:#71a712:#aba550:#2621b2:#7856b4:#43a2b4:#bfbfbf:#74715d:#f72a6f:#9ee22d:#e2dc75:#3c33ff:#ae81ff:#66d9ee:#e6e5e6"
+# palette = "#74715D:#9e1641:#71a712:#aba550:#2621b2:#7856b4:#43a2b4:#bfbfbf:#74715d:#f72a6f:#9ee22d:#e2dc75:#3c33ff:#ae81ff:#66d9ee:#e6e5e6"
 # foreground_color = "#f8f8f2"
 # background_color = "#262626"*/
 
@@ -20,13 +29,155 @@ a:hover {
   color: #71a712;
 }
 
-.app {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+.app-component {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
 }
 
-header a {
+.app-header {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 30px;
+  background: #222;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.app-header a {
   display: inline-block;
-  padding: 20px;
+  padding: 0 10px;
+  height: 100%;
+  line-height: 30px;
+  border-right: 1px solid #333;
+  text-decoration: none;
+}
+
+.app-header a:hover,
+.app-header a:active,
+a.note-teaser:hover,
+a.note-teaser:active {
+  background: #1a1a1a;
+}
+
+.app-footer {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 30px;
+  padding: 0 10px;
+  line-height: 30px;
+  background: #222;
+  color: #444;
+  border-top: 1px solid #333;
+}
+
+.app-body {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  top: 30px;
+  right: 0;
+  bottom: 30px;
+}
+
+.app-body > * {
+  height: 100%;
+}
+
+.home-component aside {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+}
+
+.home-component main {
+  position: absolute;
+  z-index: 10;
+  left: 200px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.note-form-component,
+.note-component,
+.about-component {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.note-form-component,
+.about-component {
+  padding-left: 200px;
+}
+
+.notes-list-component {
+  height: 100%;
+  border-right: 1px solid #1a1a1a;
+}
+
+.notes-list-header {
+  padding: 10px;
+  /*min-height: 80px;*/
+}
+
+.notes-list-header h1 {
+  margin: 0;
+  padding: 10px 0;
+}
+
+.notes-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.note-teaser {
+  display: block;
+  padding: 10px;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #1a1a1a;
+  text-decoration: none;
+}
+
+.note-teaser.active {
+  background: #222;
+}
+
+.note-title {
+  margin-top: 0;
+}
+
+.form-field {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  background: #222;
+  color: #f8f8f2;
+  border: 1px solid #181818;
+}
+
+.form-field.note-title {
+  font-size: 20px;
+}
+
+.form-field.note-content {
+  height: 400px;
+}
+
+.note-action {
+  margin-right: 10px;
 }
