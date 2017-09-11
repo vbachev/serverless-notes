@@ -3,7 +3,7 @@ import {Route, Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import * as actions from '../lib/actions'
-import ConnectedHome from './ConnectedHome'
+import Home from './Home'
 import CreateNote from './CreateNote'
 import About from './About'
 
@@ -21,8 +21,8 @@ class App extends React.Component {
 					<Link to='/about'>About</Link>
 				</header>
 				<main>
-					<Route path='/' component={ConnectedHome} exact />
-					<Route path='/note/:id' component={ConnectedHome}/>
+					<Route path='/' component={Home} exact />
+					<Route path='/note/:id' component={Home}/>
 					<Route path='/create' component={CreateNote} exact />
 					<Route path='/edit/:id' component={CreateNote} exact />
 					<Route path='/about' component={About} exact />
