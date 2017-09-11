@@ -60,7 +60,7 @@ export const loadNotes = () => {
 	}
 }
 
-export const createNote = (note) => {
+export const saveNote = (note) => {
 	return (dispatch) => {
 		dispatch(isLoading(true))
 		if (note.id) dispatch(push('/note/' + note.id))

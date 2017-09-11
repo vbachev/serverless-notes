@@ -6,7 +6,6 @@ import { push } from 'react-router-redux'
 class Note extends React.Component {
 	constructor (props) {
 		super(props)
-
 		this.handleDelete = this.handleDelete.bind(this)
 		this.handleEdit = this.handleEdit.bind(this)
 	}
@@ -21,11 +20,21 @@ class Note extends React.Component {
 
 	render () {
 		return (
-			<div>
-				<h1>{this.props.title}</h1>
-				<p>{this.props.content}</p>
-				<button onClick={this.handleDelete}>Delete</button>
-				<button onClick={this.handleEdit}>Edit</button>
+			<div className='note-component'>
+				<h2 className='note-title'>
+					{this.props.title}
+				</h2>
+				<p className='note-content'>
+					{this.props.content}
+				</p>
+				<div className='note-actions'>
+					<button className='note-action delete' onClick={this.handleDelete}>
+						Delete
+					</button>
+					<button className='note-action edit' onClick={this.handleEdit}>
+						Edit
+					</button>
+				</div>
 			</div>
 		)
 	}

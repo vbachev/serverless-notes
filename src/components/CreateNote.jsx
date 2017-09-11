@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { createNote } from '../lib/actions'
+import { saveNote } from '../lib/actions'
+import { push } from 'react-router-redux'
 
 class CreateNote extends React.Component {
 	constructor (props) {
@@ -14,12 +15,13 @@ class CreateNote extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleTitleChange = this.handleTitleChange.bind(this)
 		this.handleContentChange = this.handleContentChange.bind(this)
+		this.handleCancel = this.handleCancel.bind(this)
 	}
 
 	handleSubmit (e) {
 		e.preventDefault()
 		if (!this.state.title) return
-		this.props.createNote(this.state)
+		this.props.saveNote(this.state)
 	}
 
 	handleTitleChange (e) {
@@ -30,14 +32,23 @@ class CreateNote extends React.Component {
 		this.setState({ content: e.target.value })
 	}
 
+	handleCancel (e) {
+		this.props.cancelForm(this.state.id ? ('/note/' + this.state.id) : '/')
+	}
+
 	render () {
 	 	return (
-			<form onSubmit={this.handleSubmit}>
+			<form onSubmit={this.handleSubmit} className='create-note-component'>
 				<input value={this.state.title} onChange={this.handleTitleChange} />
 				<textarea value={this.state.content} onChange={this.handleContentChange} />
-				<button type='submit'>
-					Save
-				</button>
+				<div className='note-actions'>
+					<button className='note-action save' type='submit'>
+						Save
+					</button>
+					<button className='note-action cancel' onClick={this.handleCancel}>
+						Cancel
+					</button>
+				</div>
 			</form>
 		)
 	}
@@ -52,6 +63,7 @@ export default connect(
 		}
 	},
 	(dispatch) => ({
-		createNote: note => dispatch(createNote(note))
+		saveNote: note => dispatch(saveNote(note)),
+		cancelForm: path => dispatch(push(path))
 	})
 )(CreateNote)

@@ -15,18 +15,19 @@ class App extends React.Component {
 	render () {
 		return (
 			<div className="app">
-				<header>
+				<header className='app-header'>
 					<Link to='/'>Notes</Link>
 					<Link to='/create'>Create note</Link>
 					<Link to='/about'>About</Link>
 				</header>
-				<main>
+				<div className='app-body'>
 					<Route path='/' component={Home} exact />
 					<Route path='/note/:id' component={Home}/>
 					<Route path='/create' component={CreateNote} exact />
 					<Route path='/edit/:id' component={CreateNote} exact />
 					<Route path='/about' component={About} exact />
-				</main>
+				</div>
+				<footer className='app-footer'>@Footer</footer>
 			</div>
 		)
 	}
