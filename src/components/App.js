@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import * as actions from '../lib/actions'
 import Home from './Home'
-import CreateNote from './CreateNote'
+import NoteForm from './NoteForm'
 import About from './About'
 
 class App extends React.Component {
@@ -23,8 +23,8 @@ class App extends React.Component {
 				<div className='app-body'>
 					<Route path='/' component={Home} exact />
 					<Route path='/note/:id' component={Home}/>
-					<Route path='/create' component={CreateNote} exact />
-					<Route path='/edit/:id' component={CreateNote} exact />
+					<Route path='/create' component={NoteForm} exact />
+					<Route path='/edit/:id' component={NoteForm} exact />
 					<Route path='/about' component={About} exact />
 				</div>
 				<footer className='app-footer'>@Footer</footer>
