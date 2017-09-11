@@ -1,14 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const NotesList = props => {
+const NotesList = (props) => {
   return (
     <div className='notes-list-component'>
       <div className='notes-list-header'>
         <h1>Notes</h1>
       </div>
       <ul className='notes-list'>
-        {props.notes.map(note => (
+        {props.notes.map((note) => (
           <li key={note.id} className='notes-list-item'>
             {(props.openNoteId === note.id)
               ? (

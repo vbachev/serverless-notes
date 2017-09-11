@@ -4,8 +4,6 @@ import NotesList from './NotesList'
 import Note from './Note'
 
 const Home = (props) => {
-
-
 	return (
 		<div className='home-component'>
 			<aside>
@@ -26,8 +24,8 @@ const Home = (props) => {
 }
 
 const mapStateToProps = (state, props) => {
-	const matchedNoteId = props.match.params.id ? parseInt(props.match.params.id, 10) : null
-	const matchedNote = state.notes.filter(note => note.id === matchedNoteId)[0]
+	const matchedNoteId = parseInt(props.match.params.id, 10) || null
+	const matchedNote = state.notes.filter((note) => note.id === matchedNoteId)[0]
 	return {
 		isLoading: state.isLoading,
 		notes: state.notes,
@@ -35,8 +33,7 @@ const mapStateToProps = (state, props) => {
 	}
 }
 
-const mapDispatchToProps = dispatch => ({
-})
+const mapDispatchToProps = (dispatch) => ({})
 
 export default connect(
 	mapStateToProps,

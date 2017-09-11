@@ -40,10 +40,14 @@ class Note extends React.Component {
 	}
 }
 
+const mapStateToProps = (state) => ({})
+
+const mapDispatchToProps = (dispatch) => ({
+	deleteNote: (id) => dispatch(deleteNote(id)),
+	editNote: (id) => dispatch(push('/edit/' + id))
+})
+
 export default connect(
-	(state) => ({}),
-	(dispatch) => ({
-		deleteNote: (id) => dispatch(deleteNote(id)),
-		editNote: (id) => dispatch(push('/edit/' + id))
-	})
+		mapStateToProps,
+		mapDispatchToProps
 )(Note)

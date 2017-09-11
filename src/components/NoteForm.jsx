@@ -32,7 +32,7 @@ class CreateNote extends React.Component {
 		this.setState({ content: e.target.value })
 	}
 
-	handleCancel (e) {
+	handleCancel () {
 		this.props.cancelForm(this.state.id ? ('/note/' + this.state.id) : '/')
 	}
 
@@ -54,16 +54,20 @@ class CreateNote extends React.Component {
 	}
 }
 
+const mapStateToProps = (state, props) => {
+	const matchedNoteId = parseInt(props.match.params.id, 10)
+	const matchedNote = state.notes.filter((note) => note.id === matchedNoteId)[0]
+	return {
+		note: matchedNote
+	}
+}
+
+const mapDispatchToProps = (dispatch) => ({
+	saveNote: (note) => dispatch(saveNote(note)),
+	cancelForm: (path) => dispatch(push(path))
+})
+
 export default connect(
-	(state, props) => {
-		const matchedNoteId = parseInt(props.match.params.id, 10)
-		const matchedNote = state.notes.filter(note => note.id === matchedNoteId)[0]
-		return {
-			note: matchedNote
-		}
-	},
-	(dispatch) => ({
-		saveNote: note => dispatch(saveNote(note)),
-		cancelForm: path => dispatch(push(path))
-	})
+	mapStateToProps,
+	mapDispatchToProps
 )(CreateNote)

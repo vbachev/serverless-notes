@@ -1,6 +1,6 @@
-import {combineReducers} from 'redux'
-import {routerReducer} from 'react-router-redux'
-import {NOTE_DELETED, IS_LOADING, NOTES_LOADED, NOTE_CREATED, NOTE_EDITED} from './actions'
+import { combineReducers } from 'redux'
+import { routerReducer } from 'react-router-redux'
+import { NOTE_DELETED, IS_LOADING, NOTES_LOADED, NOTE_CREATED, NOTE_EDITED } from './actions'
 
 function notesReducer(state = [], action) {
 	switch (action.type) {

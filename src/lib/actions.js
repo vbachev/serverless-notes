@@ -7,6 +7,31 @@ export const NOTE_CREATED = 'NOTE_CREATED'
 export const NOTE_EDITED = 'NOTE_EDITED'
 export const NOTE_DELETED = 'NOTE_DELETED'
 
+export const isLoading = (value) => ({
+	type: IS_LOADING,
+	value
+})
+
+export const notesLoaded = (notes) => ({
+	type: NOTES_LOADED,
+	notes
+})
+
+export const noteCreated = (note) => ({
+	type: NOTE_CREATED,
+	note
+})
+
+export const noteEdited = (note) => ({
+	type: NOTE_EDITED,
+	note
+})
+
+export const noteDeleted = (id) => ({
+	type: NOTE_DELETED,
+	id
+})
+
 const getAPI = (() => {
 	let api
 	return (callback) => {
@@ -17,31 +42,6 @@ const getAPI = (() => {
 		}, () => api.signIn(() => callback(api)))
 	}
 })()
-
-export const isLoading = (value) => ({
-	type: IS_LOADING,
-	value
-})
-
-export const notesLoaded = notes => ({
-	type: NOTES_LOADED,
-	notes
-})
-
-export const noteCreated = note => ({
-	type: NOTE_CREATED,
-	note
-})
-
-export const noteEdited = note => ({
-	type: NOTE_EDITED,
-	note
-})
-
-export const noteDeleted = id => ({
-	type: NOTE_DELETED,
-	id
-})
 
 export const loadNotes = () => {
 	return (dispatch) => {
@@ -64,6 +64,7 @@ export const saveNote = (note) => {
 	return (dispatch) => {
 		dispatch(isLoading(true))
 		if (note.id) dispatch(push('/note/' + note.id))
+
 		getAPI((api) => {
 			const rawNote = [note.title, note.content]
 			if (note.id) {
@@ -85,6 +86,7 @@ export const deleteNote = (id) => {
 	return (dispatch) => {
 		dispatch(isLoading(true))
 		dispatch(push('/'))
+
 		getAPI((api) => {
 			api.remove('notes', id, () => {
 				dispatch(noteDeleted(id))

@@ -33,9 +33,13 @@ class App extends React.Component {
 	}
 }
 
+const mapStateToProps = (state) => ({})
+
+const mapDispatchToProps = (dispatch) => ({
+	loadNotes: () => dispatch(actions.loadNotes())
+})
+
 export default withRouter(connect(
-	(state) => ({}),
-	(dispatch) => ({
-		loadNotes: () => dispatch(actions.loadNotes())
-	})
+	mapStateToProps,
+	mapDispatchToProps
 )(App))
