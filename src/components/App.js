@@ -1,11 +1,11 @@
 import React from 'react'
-import {Route, Link} from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import * as actions from '../lib/actions'
-import Home from './Home'
 import NoteForm from './NoteForm'
-import About from './About'
+import NotesList from './NotesList'
+import Note from './Note'
 
 class App extends React.Component {
 	componentWillMount () {
@@ -15,25 +15,33 @@ class App extends React.Component {
 	render () {
 		return (
 			<div className="app-component">
-				<header className='app-header'>
-					<Link to='/'>Notes</Link>
-					<Link to='/create'>Create note</Link>
-					<Link to='/about'>About</Link>
-				</header>
-				<div className='app-body'>
-					<Route path='/' component={Home} exact />
-					<Route path='/note/:id' component={Home}/>
-					<Route path='/create' component={NoteForm} exact />
-					<Route path='/edit/:id' component={NoteForm} exact />
-					<Route path='/about' component={About} exact />
-				</div>
-				<footer className='app-footer'>@Footer</footer>
+				<main className='app-main'>
+					<Route path='/(create|edit)/:id?' component={NoteForm} exact />
+					<Route path='/note/:id' component={Note} exact />
+				</main>
+				<aside className='app-sidebar'>
+		      <div className='sidebar-header'>
+		        <h1>
+							<Link to='/'>Notes</Link>
+						</h1>
+						<Link to='/create'>Create note</Link>
+		      </div>
+					<Route path='/($|note|create|edit)?/:id?' component={NotesList} exact />
+				</aside>
 			</div>
 		)
 	}
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state, props) => {
+	const matchedNoteId = parseInt(props.match.params.id, 10) || null
+	const matchedNote = state.notes.filter((note) => note.id === matchedNoteId)[0]
+	return {
+		isLoading: state.isLoading,
+		notes: state.notes,
+		note: matchedNote || null
+	}
+}
 
 const mapDispatchToProps = (dispatch) => ({
 	loadNotes: () => dispatch(actions.loadNotes())

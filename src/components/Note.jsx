@@ -41,7 +41,11 @@ class Note extends React.Component {
 	}
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state, props) => {
+	const matchedNoteId = parseInt(props.match.params.id, 10) || null
+	const matchedNote = state.notes.filter((note) => note.id === matchedNoteId)[0]
+	return {...matchedNote}
+}
 
 const mapDispatchToProps = (dispatch) => ({
 	deleteNote: (id) => dispatch(deleteNote(id)),

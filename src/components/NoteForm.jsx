@@ -3,19 +3,25 @@ import { connect } from 'react-redux'
 import { saveNote } from '../lib/actions'
 import { push } from 'react-router-redux'
 
+const blankNote = {
+	id: null,
+	title: '',
+	content: ''
+}
+
 class CreateNote extends React.Component {
 	constructor (props) {
 		super(props)
-		this.state = {
-			id: props.note ? props.note.id : null,
-			title: props.note ? props.note.title : '',
-			content: props.note ? props.note.content : ''
-		}
+		this.state = props.note || blankNote
 
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleTitleChange = this.handleTitleChange.bind(this)
 		this.handleContentChange = this.handleContentChange.bind(this)
 		this.handleCancel = this.handleCancel.bind(this)
+	}
+
+	componentWillReceiveProps (newProps) {
+		this.setState(newProps.note || blankNote)
 	}
 
 	handleSubmit (e) {
@@ -56,9 +62,8 @@ class CreateNote extends React.Component {
 
 const mapStateToProps = (state, props) => {
 	const matchedNoteId = parseInt(props.match.params.id, 10)
-	const matchedNote = state.notes.filter((note) => note.id === matchedNoteId)[0]
 	return {
-		note: matchedNote
+		note: state.notes.filter((note) => note.id === matchedNoteId)[0]
 	}
 }
 

@@ -1,32 +1,38 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 const NotesList = (props) => {
   return (
-    <div className='notes-list-component'>
-      <div className='notes-list-header'>
-        <h1>Notes</h1>
-      </div>
-      <ul className='notes-list'>
-        {props.notes.map((note) => (
-          <li key={note.id} className='notes-list-item'>
-            {(props.openNoteId === note.id)
-              ? (
-                <span className='note-teaser active'>
-                  {note.title}
-                </span>
-              )
-              : (
-                <Link to={'/note/' + note.id} className='note-teaser'>
-                  {note.title}
-                </Link>
-              )
-            }
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className='notes-list-component'>
+      {props.notes.map((note) => (
+        <li key={note.id} className='notes-list-item'>
+          {(props.openNoteId === note.id)
+            ? (
+              <span className='note-teaser active'>
+                {note.title}
+              </span>
+            )
+            : (
+              <Link to={'/note/' + note.id} className='note-teaser'>
+                {note.title}
+              </Link>
+            )
+          }
+        </li>
+      ))}
+    </ul>
   )
 }
 
-export default NotesList
+const mapStateToProps = (state, props) => ({
+	notes: state.notes,
+	openNoteId: parseInt(props.match.params.id, 10)
+})
+
+const mapDispatchToProps = (dispatch) => ({})
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(NotesList)
