@@ -1,183 +1,110 @@
 * {
-  border-bottom: ;
+	box-sizing: border-box;
 }
 
 html {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: sans-serif;
-  background: #262626;
-  color: #f8f8f2;
-}
-
-/*# terminal color palette
-# palette = "#1b1d1e:#f92672:#82b414:#fd971f:#56c2d6:#8c54fe:#465457:#ccccc6:#505354:#ff5995:#b6e354:#feed6c:#8cedff:#9e6ffe:#899ca1:#f8f8f2"
-# palette = "#74715D:#9e1641:#71a712:#aba550:#2621b2:#7856b4:#43a2b4:#bfbfbf:#74715d:#f72a6f:#9ee22d:#e2dc75:#3c33ff:#ae81ff:#66d9ee:#e6e5e6"
-# foreground_color = "#f8f8f2"
-# background_color = "#262626"*/
-
-a {
-  color: #82b414;
-}
-
-a:hover {
-  color: #71a712;
+	margin: 0;
+	font-family: sans-serif;
+	color: #212121;
 }
 
 .app-component {
-  position: absolute;
-  z-index: 10;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
+	position: fixed;
+	left: 200px;
+	top: 0;
+	bottom: 0;
+	right: 0;
 }
 
-.app-header {
-  position: absolute;
-  z-index: 10;
-  left: 0;
-  top: 0;
-  right: 0;
-  height: 30px;
-  background: #222;
-  border-bottom: 1px solid #1a1a1a;
+.app-sidebar {
+	position: absolute;
+	right: 100%;
+	top: 0;
+	bottom: 0;
+	width: 200px;
+	border-right: 1px solid #BDBDBD;
 }
 
-.app-header a {
-  display: inline-block;
-  padding: 0 10px;
-  height: 100%;
-  line-height: 30px;
-  border-right: 1px solid #333;
-  text-decoration: none;
+.sidebar-header {
+	padding: 10px;
+	background: #009688;
+	color: #fff;
+	border-bottom: 1px solid #BDBDBD;
 }
 
-.app-header a:hover,
-.app-header a:active,
-a.note-teaser:hover,
-a.note-teaser:active {
-  background: #1a1a1a;
+.sidebar-header h1 {
+	margin: 0;
 }
 
-.app-footer {
-  position: absolute;
-  z-index: 10;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  height: 30px;
-  padding: 0 10px;
-  line-height: 30px;
-  background: #222;
-  color: #444;
-  border-top: 1px solid #333;
+.sidebar-header h1 a {
+	color: #B2DFDB;
 }
 
-.app-body {
-  position: absolute;
-  z-index: 10;
-  left: 0;
-  top: 30px;
-  right: 0;
-  bottom: 30px;
+.sidebar-header a {
+	display: block;
+	padding: 5px 10px;
+	color: #fff;
+	text-decoration: none;
 }
 
-.app-body > * {
-  height: 100%;
-}
-
-.home-component aside {
-  position: absolute;
-  z-index: 10;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 200px;
-}
-
-.home-component main {
-  position: absolute;
-  z-index: 10;
-  left: 200px;
-  top: 0;
-  right: 0;
-  bottom: 0;
-}
-
-.note-form-component,
-.note-component,
-.about-component {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px 0;
-}
-
-.note-form-component,
-.about-component {
-  padding-left: 200px;
+.sidebar-header a:hover,
+.sidebar-header a:active {
+	background: #00796B;
 }
 
 .notes-list-component {
-  height: 100%;
-  border-right: 1px solid #1a1a1a;
-}
-
-.notes-list-header {
-  padding: 10px;
-  /*min-height: 80px;*/
-}
-
-.notes-list-header h1 {
-  margin: 0;
-  padding: 10px 0;
-}
-
-.notes-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
 }
 
 .note-teaser {
-  display: block;
-  padding: 10px;
-  border-top: 1px solid #333;
-  border-bottom: 1px solid #1a1a1a;
-  text-decoration: none;
+	display: block;
+	padding: 10px 20px;
+	border-bottom: 1px solid #BDBDBD;
 }
 
 .note-teaser.active {
-  background: #222;
+	color: #009688;
 }
 
-.note-title {
-  margin-top: 0;
+a.note-teaser {
+	color: #757575;
+	text-decoration: none;
 }
 
-.form-field {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  background: #222;
-  color: #f8f8f2;
-  border: 1px solid #181818;
+.app-main {
+	height: 100%;
+	overflow-y: auto;
 }
 
-.form-field.note-title {
-  font-size: 20px;
+.note-component,
+.note-form-component {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
 }
 
-.form-field.note-content {
-  height: 400px;
+.note-component .note-title {
+	margin-top: 0;
+}
+
+.note-component .note-content {
+	white-space: pre-wrap;
 }
 
 .note-action {
-  margin-right: 10px;
+	margin-right: 10px;
+}
+
+.form-field {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	margin: 0 0 20px;
+	border: 1px solid #BDBDBD;
+}
+
+.form-field.note-content {
+	height: 400px;
 }
