@@ -49,30 +49,28 @@ export const loadNotes = () => {
 
 		getAPI((api) => {
 			api.getAll('notes', (data) => {
-				const notes = data.map((item, index) => ({
-					id: index + 1, // sheet rows start from 1
-					title: item[0],
-					content: item[1]
-				}))
+				const notes = data.map((item, index) => {
+					// sheet rows start from 1
+					return new Note().fromRow(item, index + 1)
+				})
 				dispatch(notesLoaded(notes))
 			})
 		})
 	}
 }
 
-export const saveNote = (note) => {
+export const saveNote = (noteData) => {
 	return (dispatch) => {
+		const note = new Note(noteData)
 		dispatch(isLoading(true))
-		if (note.id) dispatch(push('/note/' + note.id))
 
 		getAPI((api) => {
-			const rawNote = [note.title, note.content]
 			if (note.id) {
-				api.update('notes', note.id, rawNote, () => {
-					dispatch(noteEdited(note))
-				})
+				dispatch(push('/note/' + note.id))
+				dispatch(noteEdited(note))
+				api.update('notes', note.id, note.toRow(), () => {})
 			} else {
-				api.insert('notes', rawNote, (id) => {
+				api.insert('notes', note.toRow(), (id) => {
 					note.id = id
 					dispatch(noteCreated(note))
 					dispatch(push('/note/' + id))
@@ -86,11 +84,46 @@ export const deleteNote = (id) => {
 	return (dispatch) => {
 		dispatch(isLoading(true))
 		dispatch(push('/'))
+		dispatch(noteDeleted(id))
 
 		getAPI((api) => {
-			api.remove('notes', id, () => {
-				dispatch(noteDeleted(id))
-			})
+			api.remove('notes', id, () => {})
 		})
+	}
+}
+
+class Note {
+	constructor (noteData) {
+		Object.assign(this, this.getBlank(), noteData)
+	}
+
+	fromRow (rowData, id) {
+		Object.assign(this, this.getBlank(), {
+			id: id,
+			title: rowData[0],
+			content: rowData[1],
+			lastModified: rowData[2] || new Date().toISOString(),
+			deleted: rowData[3] || 0
+		})
+		return this
+	}
+
+	toRow () {
+		return [
+			this.title,
+			this.content,
+			this.lastModified,
+			this.deleted
+		]
+	}
+
+	getBlank () {
+		return {
+			id: null,
+			title: '',
+			content: '',
+			lastModified: new Date().toISOString(),
+			deleted: 0
+		}
 	}
 }
