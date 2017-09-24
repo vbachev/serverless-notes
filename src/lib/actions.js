@@ -59,13 +59,10 @@ export const loadNotes = () => {
 	}
 }
 
-export const saveNote = (note) => {
+export const saveNote = (noteData) => {
 	return (dispatch) => {
-		if (note instanceof Note) {
-			note.modify()
-		} else {
-			note = new Note(note)
-		}
+		const note = new Note(noteData)
+		note.updateLastModified()
 		dispatch(isLoading(true))
 
 		getAPI((api) => {
@@ -126,12 +123,12 @@ class Note {
 			id: null,
 			title: '',
 			content: '',
-			lastModified: new Date().toISOString(),
+			lastModified: '',
 			deleted: 0
 		}
 	}
 
-	modify () {
+	updateLastModified () {
 		this.lastModified = new Date().toISOString()
 	}
 }

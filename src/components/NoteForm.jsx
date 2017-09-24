@@ -3,16 +3,10 @@ import { connect } from 'react-redux'
 import { saveNote } from '../lib/actions'
 import { push } from 'react-router-redux'
 
-const blankNote = {
-	id: null,
-	title: '',
-	content: ''
-}
-
 class CreateNote extends React.Component {
 	constructor (props) {
 		super(props)
-		this.state = props.note || blankNote
+		this.state = this.noteToState(props.note)
 
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleTitleChange = this.handleTitleChange.bind(this)
@@ -21,7 +15,21 @@ class CreateNote extends React.Component {
 	}
 
 	componentWillReceiveProps (newProps) {
-		this.setState(newProps.note || blankNote)
+		this.setState(this.noteToState(newProps.note))
+	}
+
+	noteToState (note) {
+		return note
+			? {
+					id: note.id,
+					title: note.title,
+					content: note.content
+				}
+			: {
+					id: null,
+					title: '',
+					content: ''
+				}
 	}
 
 	handleSubmit (e) {
@@ -42,13 +50,29 @@ class CreateNote extends React.Component {
 		this.props.cancelForm(this.state.id ? ('/note/' + this.state.id) : '/')
 	}
 
+	canSave () {
+		if (this.props.note) {
+			return this.props.note.content !== this.state.content
+				|| this.props.note.title !== this.state.title
+		}
+		return !!this.state.title
+	}
+
 	render () {
-	 	return (
+		return (
 			<form onSubmit={this.handleSubmit} className='note-form-component'>
-				<input className='form-field note-title' value={this.state.title} onChange={this.handleTitleChange} />
-				<textarea className='form-field note-content' value={this.state.content} onChange={this.handleContentChange} />
+				<input name='title' type='text'
+					className='form-field note-title'
+					value={this.state.title}
+					onChange={this.handleTitleChange} />
+				<textarea name='content'
+					className='form-field note-content'
+					value={this.state.content}
+					onChange={this.handleContentChange} />
 				<div className='note-actions'>
-					<button className='note-action save' type='submit'>
+					<button type='submit'
+						className='note-action save'
+						disabled={this.canSave() ? '' : 'disabled'}>
 						Save
 					</button>
 					<button className='note-action cancel' onClick={this.handleCancel}>
