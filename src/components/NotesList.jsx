@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 const NotesList = (props) => {
+  const sortedNotes = props.notes.sort((a, b) => a.lastModified < b.lastModified)
   return (
     <ul className='notes-list-component'>
-      {props.notes.map((note) => (
+      {sortedNotes.map((note) => (
         <li key={note.id} className='notes-list-item'>
           {(props.openNoteId === note.id)
             ? (
