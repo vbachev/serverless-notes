@@ -108,3 +108,59 @@ a.note-teaser {
 .form-field.note-content {
 	height: 400px;
 }
+
+.app-component:before {
+	content: 'Loading ...';
+	position: fixed;
+	z-index: 20;
+	top: 100px;
+	left: 50%;
+	width: 200px;
+	height: 100px;
+	margin: 0 0 0 -100px;
+	background: #009688;
+	color: #B2DFDB;
+	font-weight: bold;
+	text-align: center;
+	line-height: 100px;
+	transform: translateY(-200px);
+	opacity: 0;
+	transition: .2s ease-in;
+	animation: curtain .2s 1 ease-in;
+}
+
+.app-component.loading:before {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+.app-component:after {
+	content: '';
+	cursor: progress;
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(255, 255, 255, .6);
+	transform: translateY(100%);
+	opacity: 0;
+	transition: opacity .2s ease-in;
+}
+
+.app-component.loading:after {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+@keyframes curtain {
+	0% {
+		transform: translateY(-50%);
+		opacity: 0;
+	}
+	100% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}

@@ -13,8 +13,9 @@ class App extends React.Component {
 	}
 
 	render () {
+		const classes = 'app-component' + (this.props.isLoading ? ' loading' : '')
 		return (
-			<div className="app-component">
+			<div className={classes}>
 				<main className='app-main'>
 					<Route path='/(create|edit)/:id?' component={NoteForm} exact />
 					<Route path='/note/:id' component={Note} exact />
@@ -33,15 +34,9 @@ class App extends React.Component {
 	}
 }
 
-const mapStateToProps = (state, props) => {
-	const matchedNoteId = parseInt(props.match.params.id, 10) || null
-	const matchedNote = state.notes.filter((note) => note.id === matchedNoteId)[0]
-	return {
-		isLoading: state.isLoading,
-		notes: state.notes,
-		note: matchedNote || null
-	}
-}
+const mapStateToProps = (state) => ({
+	isLoading: state.isLoading
+})
 
 const mapDispatchToProps = (dispatch) => ({
 	loadNotes: () => dispatch(actions.loadNotes())
