@@ -52,6 +52,13 @@ html {
 	background: #00796B;
 }
 
+.sidebar-search {
+	width: 100%;
+	padding: 10px;
+	margin: 10px 0 0;
+	border: 1px solid #00796B;
+}
+
 .notes-list-component {
 	padding: 0;
 	margin: 0;

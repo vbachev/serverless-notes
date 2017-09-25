@@ -6,6 +6,7 @@ export const IS_LOADING = 'IS_LOADING'
 export const NOTES_LOADED = 'NOTES_LOADED'
 export const NOTE_CREATED = 'NOTE_CREATED'
 export const NOTE_EDITED = 'NOTE_EDITED'
+export const SEARCH_CHANGED = 'SEARCH_CHANGED'
 
 export const isLoading = (value) => ({
 	type: IS_LOADING,
@@ -25,6 +26,11 @@ export const noteCreated = (note) => ({
 export const noteEdited = (note) => ({
 	type: NOTE_EDITED,
 	note
+})
+
+export const searchChanged = (searchTerm) => ({
+	type: SEARCH_CHANGED,
+	searchTerm
 })
 
 const getAPI = (() => {
