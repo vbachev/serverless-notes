@@ -3,10 +3,15 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 const NotesList = (props) => {
-  const sortedNotes = props.notes.sort((a, b) => a.lastModified < b.lastModified)
+  const sortingMethod = (a, b) => a.lastModified < b.lastModified
+  const filteringMethod = props.filter === 'deleted'
+    ? (note) => !!note.deleted
+    : (note) => !note.deleted
+  const notes = props.notes.sort(sortingMethod).filter(filteringMethod)
+  const path = props.filter === 'deleted' ? 'deleted' : 'note'
   return (
     <ul className='notes-list-component'>
-      {sortedNotes.map((note) => (
+      {notes.map((note) => (
         <li key={note.id} className='notes-list-item'>
           {(props.openNoteId === note.id)
             ? (
@@ -15,7 +20,7 @@ const NotesList = (props) => {
               </span>
             )
             : (
-              <Link to={'/note/' + note.id} className='note-teaser'>
+              <Link to={'/' + path + '/' + note.id} className='note-teaser'>
                 {note.title}
               </Link>
             )
@@ -28,7 +33,8 @@ const NotesList = (props) => {
 
 const mapStateToProps = (state, props) => ({
 	notes: state.notes,
-	openNoteId: parseInt(props.match.params.id, 10)
+	openNoteId: parseInt(props.match.params.id, 10),
+  filter: props.match.params[0]
 })
 
 const mapDispatchToProps = (dispatch) => ({})

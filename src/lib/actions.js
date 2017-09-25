@@ -5,7 +5,6 @@ export const IS_LOADING = 'IS_LOADING'
 export const NOTES_LOADED = 'NOTES_LOADED'
 export const NOTE_CREATED = 'NOTE_CREATED'
 export const NOTE_EDITED = 'NOTE_EDITED'
-export const NOTE_DELETED = 'NOTE_DELETED'
 
 export const isLoading = (value) => ({
 	type: IS_LOADING,
@@ -25,11 +24,6 @@ export const noteCreated = (note) => ({
 export const noteEdited = (note) => ({
 	type: NOTE_EDITED,
 	note
-})
-
-export const noteDeleted = (id) => ({
-	type: NOTE_DELETED,
-	id
 })
 
 const getAPI = (() => {
@@ -81,14 +75,26 @@ export const saveNote = (noteData) => {
 	}
 }
 
-export const deleteNote = (id) => {
+export const deleteNote = (note) => {
 	return (dispatch) => {
-		dispatch(isLoading(true))
+		note.updateLastModified()
+		note.deleted = 1
 		dispatch(push('/'))
-		dispatch(noteDeleted(id))
 
 		getAPI((api) => {
-			api.remove('notes', id, () => {})
+			api.update('notes', note.id, note.toRow(), () => {})
+		})
+	}
+}
+
+export const restoreNote = (note) => {
+	return (dispatch) => {
+		note.updateLastModified()
+		note.deleted = 0
+		dispatch(push('/'))
+
+		getAPI((api) => {
+			api.update('notes', note.id, note.toRow(), () => {})
 		})
 	}
 }
@@ -104,7 +110,7 @@ class Note {
 			title: rowData[0],
 			content: rowData[1],
 			lastModified: rowData[2],
-			deleted: rowData[3]
+			deleted: parseInt(rowData[3], 10)
 		})
 		return this
 	}

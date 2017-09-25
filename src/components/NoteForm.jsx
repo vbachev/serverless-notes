@@ -46,7 +46,8 @@ class CreateNote extends React.Component {
 		this.setState({ content: e.target.value })
 	}
 
-	handleCancel () {
+	handleCancel (e) {
+		e.preventDefault()
 		this.props.cancelForm(this.state.id ? ('/note/' + this.state.id) : '/')
 	}
 

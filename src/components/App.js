@@ -18,16 +18,17 @@ class App extends React.Component {
 			<div className={classes}>
 				<main className='app-main'>
 					<Route path='/(create|edit)/:id?' component={NoteForm} exact />
-					<Route path='/note/:id' component={Note} exact />
+					<Route path='/(note|deleted)/:id' component={Note} exact />
 				</main>
 				<aside className='app-sidebar'>
 		      <div className='sidebar-header'>
 		        <h1>
 							<Link to='/'>Notes</Link>
 						</h1>
-						<Link to='/create'>Create note</Link>
+						<Link to='/deleted'>Deleted notes</Link>
+						<Link to='/create'>Create note [+]</Link>
 		      </div>
-					<Route path='/($|note|create|edit)?/:id?' component={NotesList} exact />
+					<Route path='/($|note|create|edit|deleted)?/:id?' component={NotesList} exact />
 				</aside>
 			</div>
 		)
