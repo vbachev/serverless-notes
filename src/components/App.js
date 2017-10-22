@@ -34,8 +34,9 @@ class App extends React.Component {
 			<div className={classes}>
 				<header className='app-header'>
 					<div className='container'>
+						<label htmlFor='sidebarControl' className='sidebar-toggle' />
 						<h1 className='app-title'>
-							Yet another notes app
+							My notes
 						</h1>
 					</div>
 				</header>
@@ -43,6 +44,7 @@ class App extends React.Component {
 					<Route path='/(create|edit)/:id?' component={NoteForm} exact />
 					<Route path='/(note|deleted)/:id' component={Note} exact />
 				</main>
+				<input type='checkbox' id='sidebarControl' />
 				<aside className='app-sidebar'>
 					<div className='sidebar-header'>
 						<Link to='/'>Notes</Link>
@@ -55,6 +57,7 @@ class App extends React.Component {
 					</div>
 					<Route path='/($|note|create|edit|deleted)?/:id?' component={NotesList} exact />
 				</aside>
+				<label htmlFor='sidebarControl' className='sidebar-overlay' />
 			</div>
 		)
 	}

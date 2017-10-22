@@ -21,15 +21,15 @@ class CreateNote extends React.Component {
 	noteToState (note) {
 		return note
 			? {
-					id: note.id,
-					title: note.title,
-					content: note.content
-				}
+				id: note.id,
+				title: note.title,
+				content: note.content
+			}
 			: {
-					id: null,
-					title: '',
-					content: ''
-				}
+				id: null,
+				title: '',
+				content: ''
+			}
 	}
 
 	handleSubmit (e) {
