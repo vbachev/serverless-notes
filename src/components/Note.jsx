@@ -27,28 +27,31 @@ class Note extends React.Component {
 	render () {
 		const note = this.props.note || {}
 		return (
-			<div className='note-component'>
-				<h2 className='note-title'>
+			<div className='note-component container card'>
+				<h2 className='note-title card-header'>
 					{note.title}
 				</h2>
 				<p className='note-content'>
 					{note.content}
 				</p>
-				<div className='note-actions'>
+				<div className='note-actions card-footer'>
 					{note.deleted
 						? (
-							<button className='note-action restore' onClick={this.handleRestore}>
+							<button className='note-action restore'
+								onClick={this.handleRestore}>
 								Restore
 							</button>
 						)
 						: (
-							<button className='note-action delete' onClick={this.handleDelete}>
+							<button className='note-action delete'
+								onClick={this.handleDelete}>
 								Delete
 							</button>
 						)
 					}
 					{!note.deleted &&
-						<button className='note-action edit' onClick={this.handleEdit}>
+						<button className='note-action edit'
+							onClick={this.handleEdit}>
 							Edit
 						</button>
 					}

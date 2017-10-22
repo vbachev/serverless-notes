@@ -61,7 +61,7 @@ class CreateNote extends React.Component {
 
 	render () {
 		return (
-			<form onSubmit={this.handleSubmit} className='note-form-component'>
+			<form onSubmit={this.handleSubmit} className='note-form-component container card'>
 				<input name='title' type='text'
 					className='form-field note-title'
 					value={this.state.title}
@@ -70,14 +70,14 @@ class CreateNote extends React.Component {
 					className='form-field note-content'
 					value={this.state.content}
 					onChange={this.handleContentChange} />
-				<div className='note-actions'>
+				<div className='note-actions card-footer'>
+					<button className='note-action cancel' onClick={this.handleCancel}>
+						Cancel
+					</button>
 					<button type='submit'
 						className='note-action save'
 						disabled={this.canSave() ? '' : 'disabled'}>
 						Save
-					</button>
-					<button className='note-action cancel' onClick={this.handleCancel}>
-						Cancel
 					</button>
 				</div>
 			</form>

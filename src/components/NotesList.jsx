@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 class NotesList extends React.Component {
+  getLinkPath (id) {
+    const path = this.props.filter === 'deleted' ? 'deleted' : 'note'
+    return '/' + path + '/' + id
+  }
+
   render () {
     const sortingMethod = (a, b) => a.lastModified < b.lastModified
     const filteringMethod = this.props.filter === 'deleted'
@@ -15,7 +20,6 @@ class NotesList extends React.Component {
       .sort(sortingMethod)
       .filter(filteringMethod)
       .filter(searchFilteringMethod)
-    const path = this.props.filter === 'deleted' ? 'deleted' : 'note'
     return (
       <ul className='notes-list-component'>
         {notes.map((note) => (
@@ -27,7 +31,7 @@ class NotesList extends React.Component {
                 </span>
               )
               : (
-                <Link to={'/' + path + '/' + note.id} className='note-teaser'>
+                <Link to={this.getLinkPath(note.id)} className='note-teaser'>
                   {note.title}
                 </Link>
               )

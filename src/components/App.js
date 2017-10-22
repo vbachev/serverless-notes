@@ -32,22 +32,27 @@ class App extends React.Component {
 		const classes = 'app-component' + (this.props.isLoading ? ' loading' : '')
 		return (
 			<div className={classes}>
+				<header className='app-header'>
+					<div className='container'>
+						<h1 className='app-title'>
+							Yet another notes app
+						</h1>
+					</div>
+				</header>
 				<main className='app-main'>
 					<Route path='/(create|edit)/:id?' component={NoteForm} exact />
 					<Route path='/(note|deleted)/:id' component={Note} exact />
 				</main>
 				<aside className='app-sidebar'>
-		      <div className='sidebar-header'>
-		        <h1>
-							<Link to='/'>Notes</Link>
-						</h1>
+					<div className='sidebar-header'>
+						<Link to='/'>Notes</Link>
 						<Link to='/deleted'>Deleted notes</Link>
 						<Link to='/create'>Create note [+]</Link>
 						<input type='text' name='search'
 							className='sidebar-search'
 						 	placeholder='Search'
 							onChange={this.handleSearchChange} />
-		      </div>
+					</div>
 					<Route path='/($|note|create|edit|deleted)?/:id?' component={NotesList} exact />
 				</aside>
 			</div>

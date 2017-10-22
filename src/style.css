@@ -8,12 +8,19 @@ html {
 	color: #212121;
 }
 
+.container {
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .app-component {
 	position: fixed;
 	left: 200px;
 	top: 0;
 	bottom: 0;
 	right: 0;
+	background: #ededed;
 }
 
 .app-sidebar {
@@ -22,41 +29,35 @@ html {
 	top: 0;
 	bottom: 0;
 	width: 200px;
-	border-right: 1px solid #BDBDBD;
+	box-shadow: 1px 2px 3px rgba(0,0,0,.4);
 }
 
 .sidebar-header {
 	padding: 10px;
-	background: #009688;
+	background: #9a1b38;
 	color: #fff;
-	border-bottom: 1px solid #BDBDBD;
-}
-
-.sidebar-header h1 {
-	margin: 0;
-}
-
-.sidebar-header h1 a {
-	color: #B2DFDB;
+	box-shadow: 1px 2px 3px rgba(0,0,0,.4);
 }
 
 .sidebar-header a {
 	display: block;
 	padding: 5px 10px;
-	color: #fff;
+	color: #f7cba3;
 	text-decoration: none;
 }
 
 .sidebar-header a:hover,
 .sidebar-header a:active {
-	background: #00796B;
+	background: #d3253c;
+	color: white;
 }
 
 .sidebar-search {
 	width: 100%;
 	padding: 10px;
 	margin: 10px 0 0;
-	border: 1px solid #00796B;
+	border: 1px solid #5b0833;
+	border-radius: 2px;
 }
 
 .notes-list-component {
@@ -71,8 +72,14 @@ html {
 	border-bottom: 1px solid #BDBDBD;
 }
 
+.note-teaser:hover,
+.note-teaser:active {
+	background: #f7cba3;
+	color: #ee5f49;
+}
+
 .note-teaser.active {
-	color: #009688;
+	color: #9a1b38;
 }
 
 a.note-teaser {
@@ -80,20 +87,72 @@ a.note-teaser {
 	text-decoration: none;
 }
 
+.app-header {
+	position: absolute;
+	z-index: 10;
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: 10px 0;
+	background: #5b0833;
+	color: #f7cba3;
+	box-shadow: 1px 2px 3px rgba(0,0,0,.4);
+}
+
+.app-title {
+	font-size: 20px;
+	margin: 0 20px;
+	line-height: 1em;
+}
+
 .app-main {
-	height: 100%;
+	max-height: 100%;
+	padding: 60px 20px 20px;
 	overflow-y: auto;
 }
 
-.note-component,
-.note-form-component {
-	max-width: 800px;
-	margin: 0 auto;
+.card {
+	position: relative;	
 	padding: 20px;
+	border-radius: 3px;
+	background: white;
+	box-shadow: 1px 2px 3px rgba(0,0,0,0.4);
+	overflow: hidden;
 }
 
-.note-component .note-title {
+.card-header {
 	margin-top: 0;
+	margin: -20px -20px 20px;
+	padding: 10px 20px;
+	border-bottom: 1px solid #ddd;
+	color: #9a1b38;
+}
+
+.card-footer {
+	border-top: 1px solid #ddd;
+	margin: 0 -20px -20px;
+	padding: 10px 20px;
+	text-align: right;
+}
+
+button {
+	border: 0 none;
+	padding: 10px 20px;
+	border-radius: 3px;
+	background: #888;
+	color: white;
+	box-shadow: inset -1px -1px 10px rgba(0,0,0,.1);
+	cursor: pointer;
+}
+
+button:disabled {
+	opacity: .7;
+	text-decoration: line-through;
+}
+
+button.edit,
+button.save {
+	background: #d3253c;
 }
 
 .note-component .note-content {
@@ -101,7 +160,7 @@ a.note-teaser {
 }
 
 .note-action {
-	margin-right: 10px;
+	margin-left: 10px;
 }
 
 .form-field {
@@ -110,6 +169,7 @@ a.note-teaser {
 	padding: 10px;
 	margin: 0 0 20px;
 	border: 1px solid #BDBDBD;
+	border-radius: 2px;
 }
 
 .form-field.note-content {
@@ -125,8 +185,8 @@ a.note-teaser {
 	width: 200px;
 	height: 100px;
 	margin: 0 0 0 -100px;
-	background: #009688;
-	color: #B2DFDB;
+	background: #5b0833;
+	color: #f7cba3;
 	font-weight: bold;
 	text-align: center;
 	line-height: 100px;
@@ -134,6 +194,8 @@ a.note-teaser {
 	opacity: 0;
 	transition: .2s ease-in;
 	animation: curtain .2s 1 ease-in;
+	box-shadow: 1px 2px 3px rgba(0,0,0,.4);
+	border-radius: 3px;
 }
 
 .app-component.loading:before {
