@@ -4,7 +4,10 @@ import thunk from 'redux-thunk'
 import rootReducer from './reducer'
 import createHistory from 'history/createBrowserHistory'
 
-export const history = createHistory()
+const homepage = 'https://vbachev.github.io/serverless-notes'
+export const history = createHistory({
+  basename: window.location.href.includes(homepage) ? 'serverless-notes' : ''
+})
 
 const enhancers = []
 const middleware = [
