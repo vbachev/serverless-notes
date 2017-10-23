@@ -1,8 +1,12 @@
 {
-  "name": "notes-app",
+  "name": "serverless-notes",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://vbachev.github.io/serverless-notes",
+  "author": {
+    "name" : "Vasil Bachev",
+    "email" : "vasil@vasilbachev.com"
+  },
   "dependencies": {
     "google-sheets-api": "git+https://github.com/vbachev/google-sheets-api.git",
     "history": "^4.7.2",
