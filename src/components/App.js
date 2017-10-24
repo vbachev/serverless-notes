@@ -36,7 +36,7 @@ class App extends React.Component {
 					<div className='container'>
 						<label htmlFor='sidebarControl' className='sidebar-toggle' />
 						<h1 className='app-title'>
-							My notes
+							Serverless notes
 						</h1>
 					</div>
 				</header>
