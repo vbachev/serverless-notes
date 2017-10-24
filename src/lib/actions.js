@@ -7,6 +7,7 @@ export const NOTES_LOADED = 'NOTES_LOADED'
 export const NOTE_CREATED = 'NOTE_CREATED'
 export const NOTE_EDITED = 'NOTE_EDITED'
 export const SEARCH_CHANGED = 'SEARCH_CHANGED'
+export const IS_SIGNED_IN = 'IS_SIGNED_IN'
 
 export const isLoading = (value) => ({
 	type: IS_LOADING,
@@ -33,16 +34,59 @@ export const searchChanged = (searchTerm) => ({
 	searchTerm
 })
 
+export const isSignedIn = (value) => ({
+	type: IS_SIGNED_IN,
+	value
+})
+
 const getAPI = (() => {
 	let api
 	return (callback) => {
 		if (api) return callback(api)
-		api = GSAPI({
-			clientId: '780267795399-048pa12qtdcpdganklc6ggmpbm3epucv.apps.googleusercontent.com',
-			spreadsheetId: '1jaqCfROgm33Uvm4gnAu3c7ALLjXmO4Ijk-tc5YFAwho'
-		}, () => api.signIn(() => callback(api)))
+		var clientId = '780267795399-048pa12qtdcpdganklc6ggmpbm3epucv.apps.googleusercontent.com'
+		var spreadsheetId = '1jaqCfROgm33Uvm4gnAu3c7ALLjXmO4Ijk-tc5YFAwho'
+		api = GSAPI(clientId, () => {
+			api.setSpreadsheetId(spreadsheetId)
+			callback(api)
+		})
 	}
 })()
+
+export const initGoogleAPI = () => {
+	return (dispatch) => {
+		getAPI((api) => {
+			dispatch(isLoading(false))
+			const signedIn = api.isSignedIn()
+			dispatch(isSignedIn(signedIn))
+			if (signedIn) {
+				dispatch(loadNotes())
+			} else {
+				dispatch(push('/'))
+			}
+		})
+	}
+}
+
+export const signIn = () => {
+	return (dispatch) => {
+		getAPI((api) => {
+			api.signIn((signedIn) => {
+				dispatch(isSignedIn(signedIn))
+				if (signedIn) dispatch(loadNotes())
+			})
+		})
+	}
+}
+
+export const signOut = () => {
+	return (dispatch) => {
+		getAPI((api) => {
+			api.signOut()
+			dispatch(isSignedIn(false))
+			dispatch(notesLoaded([]))
+		})
+	}
+}
 
 export const loadNotes = () => {
 	return (dispatch) => {

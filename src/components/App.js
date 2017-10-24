@@ -17,7 +17,7 @@ class App extends React.Component {
 	}
 
 	componentWillMount () {
-		this.props.loadNotes()
+		this.props.initGoogleAPI()
 	}
 
 	handleSearchChange (e) {
@@ -68,7 +68,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-	loadNotes: () => dispatch(actions.loadNotes()),
+	initGoogleAPI: () => dispatch(actions.initGoogleAPI()),
 	searchChanged: (searchTerm) => dispatch(actions.searchChanged(searchTerm))
 })
 
