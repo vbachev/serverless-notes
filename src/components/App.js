@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import * as actions from '../lib/actions'
 import { debounce } from '../lib/utils'
+import Home from './Home'
 import NoteForm from './NoteForm'
 import NotesList from './NotesList'
 import Note from './Note'
@@ -40,11 +41,16 @@ class App extends React.Component {
 						</h1>
 					</div>
 				</header>
+
 				<main className='app-main'>
+					<Route path='/(deleted)?' component={Home} exact />
 					<Route path='/(create|edit)/:id?' component={NoteForm} exact />
 					<Route path='/(note|deleted)/:id' component={Note} exact />
 				</main>
+
 				<input type='checkbox' id='sidebarControl' />
+				<label htmlFor='sidebarControl' className='sidebar-overlay' />
+
 				<aside className='app-sidebar'>
 					<div className='sidebar-header'>
 						<Link to='/'>Notes</Link>
@@ -57,7 +63,6 @@ class App extends React.Component {
 					</div>
 					<Route path='/($|note|create|edit|deleted)?/:id?' component={NotesList} exact />
 				</aside>
-				<label htmlFor='sidebarControl' className='sidebar-overlay' />
 			</div>
 		)
 	}
