@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
-import { SEARCH_CHANGED, IS_LOADING, NOTES_LOADED, NOTE_CREATED, NOTE_EDITED, IS_SIGNED_IN } from './actions'
+import { SEARCH_CHANGED, IS_LOADING, NOTES_LOADED, NOTE_CREATED, NOTE_EDITED, IS_SIGNED_IN, PROFILE } from './actions'
 
 function notesReducer (state = [], action) {
 	switch (action.type) {
@@ -28,10 +28,14 @@ function isLoadingReducer (state = true, action) {
 	}
 }
 
-function isSignedInReducer (state = false, action) {
+function userReducer (state = { isSignedIn: false }, action) {
 	switch (action.type) {
 		case IS_SIGNED_IN:
-			return action.value
+			return Object.assign({}, action.value ? state : {}, {
+				isSignedIn: action.value
+			})
+		case PROFILE:
+			return Object.assign({}, state, action.data)
 		default:
 			return state
 	}
@@ -50,6 +54,6 @@ export default combineReducers({
   routing: routerReducer,
   notes: notesReducer,
 	isLoading: isLoadingReducer,
-	isSignedIn: isSignedInReducer,
-	searchTerm: searchTermReducer
+	searchTerm: searchTermReducer,
+	user: userReducer
 })

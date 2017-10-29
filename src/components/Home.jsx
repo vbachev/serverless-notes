@@ -37,7 +37,12 @@ class Home extends React.Component {
 				<h2 className='card-header'>
 					Welcome back!
 				</h2>
-				<p>You are now logged in</p>
+				<p>You are now logged in as:</p>
+				<ul>
+					<li>{this.props.user.name}</li>
+					<li>{this.props.user.email}</li>
+					<li><img alt={this.props.user.name} src={this.props.user.image} /></li>
+				</ul>
 				<div className='card-footer'>
 					<button className='action sign-out' onClick={this.props.signOut}>
 						Sign-out
@@ -48,7 +53,7 @@ class Home extends React.Component {
 	}
 
 	render () {
-		if (this.props.isSignedIn) {
+		if (this.props.user.isSignedIn) {
 			return this.renderUserPage()
 		} else {
 			return this.renderGuestPage()
@@ -57,7 +62,7 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-	isSignedIn: state.isSignedIn
+	user: state.user
 })
 
 const mapDispatchToProps = (dispatch) => ({

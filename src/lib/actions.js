@@ -8,6 +8,7 @@ export const NOTE_CREATED = 'NOTE_CREATED'
 export const NOTE_EDITED = 'NOTE_EDITED'
 export const SEARCH_CHANGED = 'SEARCH_CHANGED'
 export const IS_SIGNED_IN = 'IS_SIGNED_IN'
+export const PROFILE = 'PROFILE'
 
 export const isLoading = (value) => ({
 	type: IS_LOADING,
@@ -39,6 +40,11 @@ export const isSignedIn = (value) => ({
 	value
 })
 
+export const profile = (data) => ({
+	type: PROFILE,
+	data
+})
+
 const getAPI = (() => {
 	let api
 	return (callback) => {
@@ -56,9 +62,10 @@ export const initGoogleAPI = () => {
 	return (dispatch) => {
 		getAPI((api) => {
 			dispatch(isLoading(false))
-			const signedIn = api.isSignedIn()
+			const signedIn = api.user.isSignedIn()
 			dispatch(isSignedIn(signedIn))
 			if (signedIn) {
+				dispatch(profile(api.user.getProfile()))
 				dispatch(loadNotes())
 			} else {
 				dispatch(push('/'))
@@ -70,9 +77,12 @@ export const initGoogleAPI = () => {
 export const signIn = () => {
 	return (dispatch) => {
 		getAPI((api) => {
-			api.signIn((signedIn) => {
+			api.user.signIn((signedIn) => {
 				dispatch(isSignedIn(signedIn))
-				if (signedIn) dispatch(loadNotes())
+				if (signedIn) {
+					dispatch(profile(api.user.getProfile()))
+					dispatch(loadNotes())
+				}
 			})
 		})
 	}
@@ -81,7 +91,7 @@ export const signIn = () => {
 export const signOut = () => {
 	return (dispatch) => {
 		getAPI((api) => {
-			api.signOut()
+			api.user.signOut()
 			dispatch(isSignedIn(false))
 			dispatch(notesLoaded([]))
 		})
