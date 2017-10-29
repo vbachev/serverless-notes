@@ -50,9 +50,8 @@ const getAPI = (() => {
 	return (callback) => {
 		if (api) return callback(api)
 		var clientId = '780267795399-048pa12qtdcpdganklc6ggmpbm3epucv.apps.googleusercontent.com'
-		var spreadsheetId = '1jaqCfROgm33Uvm4gnAu3c7ALLjXmO4Ijk-tc5YFAwho'
-		api = GSAPI(clientId, () => {
-			api.setSpreadsheetId(spreadsheetId)
+		var spreadsheet = { name: 'serverless_notes_storage', sheets: [ 'notes' ] }
+		api = GSAPI({ clientId, spreadsheet }, () => {
 			callback(api)
 		})
 	}
