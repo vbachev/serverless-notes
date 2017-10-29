@@ -104,7 +104,7 @@ export const loadNotes = () => {
 
 		getAPI((api) => {
 			api.getAll('notes', (data) => {
-				const notes = data.map((item, index) => {
+				const notes = (data || []).map((item, index) => {
 					// sheet rows start from 1
 					return new Note().fromRow(item, index + 1)
 				})
