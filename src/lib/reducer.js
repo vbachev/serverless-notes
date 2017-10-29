@@ -35,7 +35,9 @@ function userReducer (state = { isSignedIn: false }, action) {
 				isSignedIn: action.value
 			})
 		case PROFILE:
-			return Object.assign({}, state, action.data)
+			return Object.assign({}, state, {
+				profile: action.data
+			})
 		case SPREADSHEET:
 			return Object.assign({}, state, {
 				spreadsheet: action.data
