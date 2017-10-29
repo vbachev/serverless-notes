@@ -9,6 +9,7 @@ export const NOTE_EDITED = 'NOTE_EDITED'
 export const SEARCH_CHANGED = 'SEARCH_CHANGED'
 export const IS_SIGNED_IN = 'IS_SIGNED_IN'
 export const PROFILE = 'PROFILE'
+export const SPREADSHEET = 'SPREADSHEET'
 
 export const isLoading = (value) => ({
 	type: IS_LOADING,
@@ -45,6 +46,11 @@ export const profile = (data) => ({
 	data
 })
 
+export const spreadsheet = (data) => ({
+	type: SPREADSHEET,
+	data
+})
+
 const getAPI = (() => {
 	let api
 	return (callback) => {
@@ -65,10 +71,24 @@ export const initGoogleAPI = () => {
 			dispatch(isSignedIn(signedIn))
 			if (signedIn) {
 				dispatch(profile(api.user.getProfile()))
+				dispatch(getSpreadsheetData())
 				dispatch(loadNotes())
 			} else {
 				dispatch(push('/'))
 			}
+		})
+	}
+}
+
+export const getSpreadsheetData = () => {
+	return (dispatch) => {
+		getAPI((api) => {
+			api.getSpreadsheet((data) => {
+				dispatch(spreadsheet({
+					title: data.properties.title,
+					url: data.spreadsheetUrl
+				}))
+			})
 		})
 	}
 }
@@ -80,6 +100,7 @@ export const signIn = () => {
 				dispatch(isSignedIn(signedIn))
 				if (signedIn) {
 					dispatch(profile(api.user.getProfile()))
+					dispatch(getSpreadsheetData())
 					dispatch(loadNotes())
 				}
 			})
