@@ -63,10 +63,12 @@ class CreateNote extends React.Component {
 		return (
 			<form onSubmit={this.handleSubmit} className='note-form-component container card'>
 				<input name='title' type='text'
+					placeholder='Note title'
 					className='form-field note-title'
 					value={this.state.title}
 					onChange={this.handleTitleChange} />
 				<textarea name='content'
+					placeholder='Note content'
 					className='form-field note-content'
 					value={this.state.content}
 					onChange={this.handleContentChange} />
