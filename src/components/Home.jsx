@@ -21,13 +21,13 @@ class Home extends React.Component {
 				<p>In order to use it, you have sign-in with your Google account using the button below.</p>
 				<p>
 					<small>
-						It will ask for permission to create and manage files in your drive. The app will only have access to the spreadsheet it created.
+						It will ask for permission to create and manage files in your Drive. The app will only have access to the spreadsheet it created.
 						<br />
 						If you are a first-time user, the app will create a new spreadsheet to host all your notes.
 					</small>
 				</p>
 				<div className='card-footer'>
-					<button className='action sign-in' onClick={this.props.signIn}>
+					<button className='action sign-in primary' onClick={this.props.signIn}>
 						Sign-in with Google
 					</button>
 				</div>

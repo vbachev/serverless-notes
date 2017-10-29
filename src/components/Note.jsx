@@ -50,7 +50,7 @@ class Note extends React.Component {
 						)
 					}
 					{!note.deleted &&
-						<button className='note-action edit'
+						<button className='note-action edit primary'
 							onClick={this.handleEdit}>
 							Edit
 						</button>

@@ -77,7 +77,7 @@ class CreateNote extends React.Component {
 						Cancel
 					</button>
 					<button type='submit'
-						className='note-action save'
+						className='note-action save primary'
 						disabled={this.canSave() ? '' : 'disabled'}>
 						Save
 					</button>

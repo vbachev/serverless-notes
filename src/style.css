@@ -156,8 +156,7 @@ button:disabled {
 	text-decoration: line-through;
 }
 
-button.edit,
-button.save {
+button.primary {
 	background: #d3253c;
 }
 
