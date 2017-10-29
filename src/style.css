@@ -310,6 +310,10 @@ a.tile:visited {
 		padding: 40px 0 20px;
 	}
 
+	.app-sidebar {
+		transform: translateX(-10px);
+	}
+
 	.sidebar-toggle {
 		position: relative;
 		width: 20px;
