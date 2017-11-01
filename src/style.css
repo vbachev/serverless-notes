@@ -97,13 +97,29 @@ a.sidebar-link {
 	color: #ee5f49;
 }
 
-.note-teaser.active {
-	color: #9a1b38;
-}
-
 a.note-teaser {
 	color: #757575;
 	text-decoration: none;
+}
+
+.note-teaser .teaser-title {
+	margin: 0 0 5px;
+	font-size: 18px;
+	line-height: 1.2em;
+	font-weight: bold;
+}
+
+.note-teaser .teaser-summary {
+	display: inline;
+	margin: 0;
+	opacity: 0.8;
+}
+
+.note-teaser .teaser-last-modified {
+	margin-right: 5px;
+	font-size: 0.9em;
+	vertical-align: top;
+	color: #9a1b38;
 }
 
 .app-header {

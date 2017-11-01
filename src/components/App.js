@@ -49,8 +49,7 @@ class App extends React.Component {
 			<div className={classes}>
 				<header className='app-header'>
 					<div className='container'>
-						<Route path='/(edit|note|deleted)/:id' component={this.renderBackButton} />
-						<Route path='/create' component={this.renderBackButton} />
+						<Route path='/(note|edit|create)/:id?' component={this.renderBackButton} />
 						<Route path='/(deleted)?' exact component={this.renderMenuButton} />
 						<h1 className='app-title'>
 							Serverless notes

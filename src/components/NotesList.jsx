@@ -1,13 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import NoteTeaser from './NoteTeaser'
 
 class NotesList extends React.Component {
-  getLinkPath (id) {
-    const path = this.props.filter === 'deleted' ? 'deleted' : 'note'
-    return '/' + path + '/' + id
-  }
-
   render () {
     const sortingMethod = (a, b) => a.lastModified < b.lastModified
     const filteringMethod = this.props.filter === 'deleted'
@@ -28,18 +23,7 @@ class NotesList extends React.Component {
         <ul className='notes-list'>
           {notes.map((note) => (
             <li key={note.id} className='notes-list-item'>
-              {(this.props.openNoteId === note.id)
-                ? (
-                  <span className='note-teaser active'>
-                    {note.title}
-                  </span>
-                )
-                : (
-                  <Link to={this.getLinkPath(note.id)} className='note-teaser'>
-                    {note.title}
-                  </Link>
-                )
-              }
+              <NoteTeaser note={note} />
             </li>
           ))}
         </ul>
@@ -50,7 +34,6 @@ class NotesList extends React.Component {
 
 const mapStateToProps = (state, props) => ({
 	notes: state.notes,
-	openNoteId: parseInt(props.match.params.id, 10),
   filter: props.match.params[0],
   searchTerm: state.searchTerm
 })
