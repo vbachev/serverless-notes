@@ -29,13 +29,29 @@ class App extends React.Component {
 		this.props.searchChanged(this.state.searchTerm)
 	}
 
+	renderBackButton () {
+		return (
+			<Link className='header-back-button' to='/'>
+				Back
+			</Link>
+		)
+	}
+
+	renderMenuButton () {
+		return (
+			<label htmlFor='sidebarControl' className='sidebar-toggle' />
+		)
+	}
+
 	render () {
 		const classes = 'app-component' + (this.props.isLoading ? ' loading' : '')
 		return (
 			<div className={classes}>
 				<header className='app-header'>
 					<div className='container'>
-						<label htmlFor='sidebarControl' className='sidebar-toggle' />
+						<Route path='/(edit|note|deleted)/:id' component={this.renderBackButton} />
+						<Route path='/create' component={this.renderBackButton} />
+						<Route path='/(deleted)?' exact component={this.renderMenuButton} />
 						<h1 className='app-title'>
 							Serverless notes
 						</h1>
@@ -43,7 +59,7 @@ class App extends React.Component {
 				</header>
 
 				<main className='app-main'>
-					<Route path='/(deleted)?' component={Home} exact />
+					<Route path='/(deleted)?' component={NotesList} exact />
 					<Route path='/(create|edit)/:id?' component={NoteForm} exact />
 					<Route path='/(note|deleted)/:id' component={Note} exact />
 				</main>
@@ -53,15 +69,17 @@ class App extends React.Component {
 
 				<aside className='app-sidebar'>
 					<div className='sidebar-header'>
-						<Link to='/'>Notes</Link>
-						<Link to='/deleted'>Deleted notes</Link>
-						<Link to='/create'>Create note [+]</Link>
+						header
+					</div>
+					<div className='sidebar-links'>
+						<Link className='sidebar-link' to='/'>Notes</Link>
+						<Link className='sidebar-link' to='/deleted'>Deleted notes</Link>
+						<Link className='sidebar-link' to='/create'>Create note [+]</Link>
 						<input type='text' name='search'
 							className='sidebar-search'
-						 	placeholder='Search'
+							placeholder='Search'
 							onChange={this.handleSearchChange} />
 					</div>
-					<Route path='/($|note|create|edit|deleted)?/:id?' component={NotesList} exact />
 				</aside>
 			</div>
 		)

@@ -21,24 +21,29 @@ class NotesList extends React.Component {
       .filter(filteringMethod)
       .filter(searchFilteringMethod)
     return (
-      <ul className='notes-list-component'>
-        {notes.map((note) => (
-          <li key={note.id} className='notes-list-item'>
-            {(this.props.openNoteId === note.id)
-              ? (
-                <span className='note-teaser active'>
-                  {note.title}
-                </span>
-              )
-              : (
-                <Link to={this.getLinkPath(note.id)} className='note-teaser'>
-                  {note.title}
-                </Link>
-              )
-            }
-          </li>
-        ))}
-      </ul>
+      <div className='notes-list-component container card'>
+        <h2 className='notes-list-title card-header'>
+        	Notes
+        </h2>
+        <ul className='notes-list'>
+          {notes.map((note) => (
+            <li key={note.id} className='notes-list-item'>
+              {(this.props.openNoteId === note.id)
+                ? (
+                  <span className='note-teaser active'>
+                    {note.title}
+                  </span>
+                )
+                : (
+                  <Link to={this.getLinkPath(note.id)} className='note-teaser'>
+                    {note.title}
+                  </Link>
+                )
+              }
+            </li>
+          ))}
+        </ul>
+      </div>
     )
   }
 }
