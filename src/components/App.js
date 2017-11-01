@@ -58,7 +58,8 @@ class App extends React.Component {
 				</header>
 
 				<main className='app-main'>
-					<Route path='/(deleted)?' component={NotesList} exact />
+					<Route path='/(deleted)?' component={Home} exact />
+				 	<Route path='/(deleted)?' component={NotesList} exact />
 					<Route path='/(create|edit)/:id?' component={NoteForm} exact />
 					<Route path='/(note|deleted)/:id' component={Note} exact />
 				</main>
