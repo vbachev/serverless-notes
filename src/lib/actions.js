@@ -95,8 +95,11 @@ export const getSpreadsheetData = () => {
 
 export const signIn = () => {
 	return (dispatch) => {
+		dispatch(isLoading(true))
+
 		getAPI((api) => {
 			api.user.signIn((signedIn) => {
+				dispatch(isLoading(false))
 				dispatch(isSignedIn(signedIn))
 				if (signedIn) {
 					dispatch(profile(api.user.getProfile()))
