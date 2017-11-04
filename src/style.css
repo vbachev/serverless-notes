@@ -131,7 +131,41 @@ a.note-teaser {
 	padding: 10px 0;
 	background: #5b0833;
 	color: #f7cba3;
+	text-align: center;
 	box-shadow: 1px 2px 3px rgba(0,0,0,.4);
+}
+
+a.header-back-button {
+	position: relative;
+	float: left;
+	padding: 12px 0 11px 40px;
+	margin: -10px 10px;
+	color: #f7cba3;
+	text-decoration: none;
+	text-indent: -999px
+}
+
+.header-back-button:before,
+.header-back-button:after {
+	content: '';
+	position: absolute;
+	z-index: 10;
+	top: 50%;
+	left: 10px;
+	margin-top: -2px;
+	width: 10px;
+	border-top: 2px solid #f7cba3;
+}
+
+.header-back-button:before {
+	width: 15px;
+}
+
+.header-back-button:after {
+	height: 10px;
+	margin: -7px 0 0;
+	border-left: 2px solid #f7cba3;
+	transform: rotateZ(-45deg);
 }
 
 #sidebarControl {
@@ -139,6 +173,7 @@ a.note-teaser {
 }
 
 .app-title {
+	display: inline-block;
 	font-size: 20px;
 	margin: 0 20px;
 	line-height: 1em;
