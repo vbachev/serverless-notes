@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import NoteTeaser from './NoteTeaser'
+import ContextMenu from './ContextMenu'
 
 class NotesList extends React.Component {
   render () {
@@ -17,9 +18,13 @@ class NotesList extends React.Component {
       .filter(searchFilteringMethod)
     return (
       <div className='notes-list-component container card'>
-        <h2 className='notes-list-title card-header'>
-        	Notes
-        </h2>
+        <div className='card-header'>
+					<ContextMenu>
+					</ContextMenu>
+          <h2 className='card-title'>
+          	Notes
+          </h2>
+        </div>
         <ul className='notes-list'>
           {notes.map((note) => (
             <li key={note.id} className='notes-list-item'>

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { deleteNote, restoreNote } from '../lib/actions'
 import { push } from 'react-router-redux'
+import ContextMenu from './ContextMenu'
 
 class Note extends React.Component {
 	constructor (props) {
@@ -28,27 +29,31 @@ class Note extends React.Component {
 		const note = this.props.note || {}
 		return (
 			<div className='note-component container card'>
-				<h2 className='note-title card-header'>
-					{note.title}
-				</h2>
+				<div className='card-header'>
+					<ContextMenu>
+						{note.deleted
+							? (
+								<button className='note-action restore'
+									onClick={this.handleRestore}>
+									Restore
+								</button>
+							)
+							: (
+								<button className='note-action delete'
+									onClick={this.handleDelete}>
+									Delete
+								</button>
+							)
+						}
+					</ContextMenu>
+					<h2 className='card-title'>
+						{note.title}
+					</h2>
+				</div>
 				<p className='note-content'>
 					{note.content}
 				</p>
 				<div className='note-actions card-footer'>
-					{note.deleted
-						? (
-							<button className='note-action restore'
-								onClick={this.handleRestore}>
-								Restore
-							</button>
-						)
-						: (
-							<button className='note-action delete'
-								onClick={this.handleDelete}>
-								Delete
-							</button>
-						)
-					}
 					{!note.deleted &&
 						<button className='note-action edit primary'
 							onClick={this.handleEdit}>

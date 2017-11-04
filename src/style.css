@@ -161,10 +161,14 @@ a.note-teaser {
 }
 
 .card-header {
-	margin-top: 0;
 	margin: -20px -20px 20px;
 	padding: 10px 20px;
 	border-bottom: 1px solid #ddd;
+}
+
+.card-title {
+	margin: 0;
+	line-height: 1.2em;
 	color: #9a1b38;
 }
 
@@ -194,11 +198,43 @@ button.primary {
 	background: #d3253c;
 }
 
+.context-menu-wrapper {
+	position: relative;
+	float: right;
+	margin: -10px -20px -10px 10px;
+	padding: 10px;
+	border-left: 1px solid #ccc;
+}
+
+.context-menu-button {
+	height: 28px;
+	padding: 0 0 15px;
+	font-size: 28px;
+	line-height: 0;
+	transform: rotateZ(-90deg);
+	background: transparent;
+	box-shadow: 0 0 0 transparent;
+	color: inherit;
+}
+
+.context-menu {
+	position: absolute;
+	z-index: 10;
+	top: 100%;
+	right: 0;
+	padding: 10px;
+	margin: -5px 5px 0 0;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	background: #eee;
+	box-shadow: 1px 2px 3px rgba(0,0,0,0.4);
+}
+
 .note-component .note-content {
 	white-space: pre-wrap;
 }
 
-.note-action {
+.note-action + .note-action {
 	margin-left: 10px;
 }
 
