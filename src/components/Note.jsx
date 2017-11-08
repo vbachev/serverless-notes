@@ -38,12 +38,16 @@ class Note extends React.Component {
 									Restore
 								</button>
 							)
-							: (
+							: [
+								<button className='note-action edit primary'
+									onClick={this.handleEdit} key='0'>
+									Edit
+								</button>,
 								<button className='note-action delete'
-									onClick={this.handleDelete}>
+									onClick={this.handleDelete} key='1'>
 									Delete
 								</button>
-							)
+							]
 						}
 					</ContextMenu>
 					<h2 className='card-title'>
@@ -53,14 +57,6 @@ class Note extends React.Component {
 				<p className='note-content'>
 					{note.content}
 				</p>
-				<div className='note-actions card-footer'>
-					{!note.deleted &&
-						<button className='note-action edit primary'
-							onClick={this.handleEdit}>
-							Edit
-						</button>
-					}
-				</div>
 			</div>
 		)
 	}

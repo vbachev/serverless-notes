@@ -75,9 +75,6 @@ class App extends React.Component {
 				<aside className='app-sidebar'>
 					<SidebarHeader />
 					<div className='sidebar-links'>
-						<Link className='sidebar-link' to='/'>Notes</Link>
-						<Link className='sidebar-link' to='/deleted'>Deleted notes</Link>
-						<Link className='sidebar-link' to='/create'>Create note [+]</Link>
 						<input type='text' name='search'
 							className='sidebar-search'
 							placeholder='Search'

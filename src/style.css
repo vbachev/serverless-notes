@@ -67,13 +67,6 @@ html {
 	font-size: 20px;
 }
 
-.profile-text .context-menu .button,
-.profile-text .context-menu button {
-	text-align: center;
-	margin-bottom: 5px;
-	width: 100%;
-}
-
 .profile-name {
 	font-weight: bold;
 }
@@ -337,11 +330,19 @@ button.primary {
 	box-shadow: 1px 2px 3px rgba(0,0,0,0.4);
 }
 
+.context-menu .button,
+.context-menu button {
+	text-align: center;
+	margin-bottom: 5px;
+	width: 100%;
+	white-space: nowrap;
+}
+
 .note-component .note-content {
 	white-space: pre-wrap;
 }
 
-.note-action + .note-action {
+.note-actions .note-action + .note-action {
 	margin-left: 10px;
 }
 

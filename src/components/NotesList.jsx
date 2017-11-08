@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import NoteTeaser from './NoteTeaser'
 import ContextMenu from './ContextMenu'
 
@@ -20,6 +21,9 @@ class NotesList extends React.Component {
       <div className='notes-list-component container card'>
         <div className='card-header'>
 					<ContextMenu>
+            <Link className='button primary' to='/create'>Create note</Link>
+						<Link className='button' to='/'>All notes</Link>
+						<Link className='button' to='/deleted'>Deleted notes</Link>
 					</ContextMenu>
           <h2 className='card-title'>
           	Notes

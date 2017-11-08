@@ -25,10 +25,10 @@ class ContextMenu extends React.Component {
 	}
 
 	handleOutsideClick (e) {
-		if (!this.node.contains(e.target)) {
-			this.setState({ open: false })
-			this.removeClickListener()
-		}
+		// do nothing for clicks inside the menu
+		if (this.node.contains(e.target)) return
+		this.setState({ open: false })
+		this.removeClickListener()
 	}
 
 	componentWillUnmount () {
