@@ -59,10 +59,14 @@ class App extends React.Component {
 				</header>
 
 				<main className='app-main'>
-					<Route path='/(deleted)?' component={Home} exact />
-				 	<Route path='/(deleted)?' component={NotesList} exact />
-					<Route path='/(create|edit)/:id?' component={NoteForm} exact />
-					<Route path='/(note|deleted)/:id' component={Note} exact />
+					{this.props.isSignedIn
+						? [
+						 	<Route path='/(deleted)?' component={NotesList} exact key='0' />,
+							<Route path='/(create|edit)/:id?' component={NoteForm} exact key='1' />,
+							<Route path='/(note|deleted)/:id' component={Note} exact key='2' />,
+						]
+						: <Home />
+					}
 				</main>
 
 				<input type='checkbox' id='sidebarControl' />
@@ -86,6 +90,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+	isSignedIn: state.user.isSignedIn,
 	isLoading: state.isLoading
 })
 

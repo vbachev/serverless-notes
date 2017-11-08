@@ -1,11 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../lib/actions'
-import Profile from './Profile'
-import Document from './Document'
 
 class Home extends React.Component {
-	renderGuestPage () {
+	render () {
 		return (
 			<div className='home-component card container'>
 				<h2 className='card-header'>
@@ -34,47 +32,13 @@ class Home extends React.Component {
 			</div>
 		)
 	}
-
-	renderUserPage () {
-		return (
-			<div className='home-component card container'>
-				<h2 className='card-header'>
-					Welcome!
-				</h2>
-
-				<p>You are now logged in as:</p>
-				<Profile {...this.props.user.profile} />
-
-				<p>Your notes are stored here:</p>
-				{this.props.user.spreadsheet &&
-					<Document {...this.props.user.spreadsheet} />
-				}
-
-				<div className='card-footer'>
-					<button className='action sign-out' onClick={this.props.signOut}>
-						Sign-out
-					</button>
-				</div>
-			</div>
-		)
-	}
-
-	render () {
-		if (this.props.user.isSignedIn) {
-			return this.renderUserPage()
-		} else {
-			return this.renderGuestPage()
-		}
-	}
 }
 
 const mapStateToProps = (state) => ({
-	user: state.user
 })
 
 const mapDispatchToProps = (dispatch) => ({
-	signIn: () => dispatch(actions.signIn()),
-	signOut: () => dispatch(actions.signOut())
+	signIn: () => dispatch(actions.signIn())
 })
 
 export default connect(
