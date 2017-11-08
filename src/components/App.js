@@ -8,6 +8,7 @@ import Home from './Home'
 import NoteForm from './NoteForm'
 import NotesList from './NotesList'
 import Note from './Note'
+import SidebarHeader from './SidebarHeader'
 
 class App extends React.Component {
 	constructor (props) {
@@ -68,9 +69,7 @@ class App extends React.Component {
 				<label htmlFor='sidebarControl' className='sidebar-overlay' />
 
 				<aside className='app-sidebar'>
-					<div className='sidebar-header'>
-						header
-					</div>
+					<SidebarHeader />
 					<div className='sidebar-links'>
 						<Link className='sidebar-link' to='/'>Notes</Link>
 						<Link className='sidebar-link' to='/deleted'>Deleted notes</Link>

@@ -34,24 +34,81 @@ html {
 	transition: transform .3s ease-out;
 }
 
-.sidebar-header {
+.sidebar-header-component {
 	padding: 10px;
 	background: #9a1b38;
 	color: #fff;
 	box-shadow: 1px 2px 3px rgba(0,0,0,.4);
 }
 
-.sidebar-header a {
+.profile-image {
 	display: block;
-	padding: 5px 10px;
-	color: #f7cba3;
-	text-decoration: none;
+	width: 100px;
+	height: 100px;
+	margin: 10px;
+	border-radius: 100%;
+  border: 2px solid #5b0833;
 }
 
-.sidebar-header a:hover,
-.sidebar-header a:active {
-	background: #d3253c;
-	color: white;
+.profile-text {
+	position: relative;
+	margin: 0 0 10px;
+	padding: 0 30px 0 10px;
+}
+
+.profile-text .context-menu-wrapper {
+	position: absolute;
+	top: 50%;
+	right: 5px;
+	margin-top: -10px;
+}
+
+.profile-text .context-menu-button {
+	font-size: 20px;
+}
+
+.profile-text .context-menu .button,
+.profile-text .context-menu button {
+	text-align: center;
+	margin-bottom: 5px;
+	width: 100%;
+}
+
+.profile-name {
+	font-weight: bold;
+}
+
+.profile-email {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+  opacity: 0.8;
+	font-size: 0.85em;
+}
+
+.profile-placeholder {
+	padding: 10px;
+}
+
+.profile-placeholder .profile-image {
+	position: relative;
+	margin: 0 0 10px;
+	background: rgba(0,0,0,.3);
+}
+
+.profile-placeholder .profile-image:after {
+	content: '?';
+  position: absolute;
+  top: 50%;
+	left: 50%;
+	margin: -.55em 0 0 -.28em;
+  font-size: 100px;
+  font-size: 50px;
+  opacity: .2;
+}
+
+.profile-placeholder .sign-in {
+	width: 100%;
 }
 
 .sidebar-link {
@@ -201,6 +258,17 @@ a.header-back-button {
 	border-bottom: 1px solid #ddd;
 }
 
+.card-header .context-menu-wrapper {
+	float: right;
+	margin: -10px -20px -10px 10px;
+	padding: 10px;
+	border-left: 1px solid #ccc;
+}
+
+.card-header .context-menu-button {
+	font-size: 28px;
+}
+
 .card-title {
 	margin: 0;
 	line-height: 1.2em;
@@ -214,14 +282,21 @@ a.header-back-button {
 	text-align: right;
 }
 
+a.button,
 button {
 	border: 0 none;
 	padding: 10px 20px;
 	border-radius: 3px;
 	background: #888;
 	color: white;
+	font-size: 0.85em;
 	box-shadow: inset -1px -1px 10px rgba(0,0,0,.1);
 	cursor: pointer;
+}
+
+a.button {
+	display: inline-block;
+	text-decoration: none;
 }
 
 button:disabled {
@@ -229,22 +304,18 @@ button:disabled {
 	text-decoration: line-through;
 }
 
+a.button.primary,
 button.primary {
 	background: #d3253c;
 }
 
 .context-menu-wrapper {
 	position: relative;
-	float: right;
-	margin: -10px -20px -10px 10px;
-	padding: 10px;
-	border-left: 1px solid #ccc;
 }
 
 .context-menu-button {
-	height: 28px;
-	padding: 0 0 15px;
-	font-size: 28px;
+	height: 1em;
+	padding: 0 0 0.5em;
 	line-height: 0;
 	transform: rotateZ(-90deg);
 	background: transparent;
@@ -262,6 +333,7 @@ button.primary {
 	border: 1px solid #ddd;
 	border-radius: 3px;
 	background: #eee;
+	color: #212121;
 	box-shadow: 1px 2px 3px rgba(0,0,0,0.4);
 }
 
